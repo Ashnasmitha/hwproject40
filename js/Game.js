@@ -54,7 +54,7 @@ class Game{
             
             players[index -1].x = x;
             players[index - 1].y = y;
-        }
+        
 
             // Differentiate the main player by printing
             // the name of the player on the basket. 
@@ -66,11 +66,10 @@ class Game{
 
         fill("white");
         textSize(25);
-        text("SCORE :-",20,50);
-        text(allPlayers["player1"].name+"-"+allPlayer["player1"].score,20,90);
-        text(allPlayers["player2"].name+"-"+allPlayer["player2"].score,20,130);
+        text("Player 1 :"+allPlayers.player1.score,20,90);
+        text("Player 2 :"+allPlayers.player2.score,20,130);
 
-        
+    }
         // Give movements for the players using arrow keys
 
          if(keyIsDown(RIGHT_ARROW) && player.index !== null){
@@ -97,11 +96,21 @@ class Game{
                  break;
                  case 5 : fruits.addImage(fruit5_img);
                  break;
-                 default:break;
+
              }
              fruitGroup.add(fruits);
          }
-        
+         if (player.index !== null) {
+            for (var i = 0; i < fruitGroup.length; i++) {
+                if (fruitGroup.get(i).isTouching(players)) {
+                    fruitGroup.get(i).destroy();
+                    player.score =player.score+1;
+                    player.update();
+                    
+                }
+                
+            }
+        }      
         
     }
 
